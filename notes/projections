@@ -1,0 +1,63 @@
+	var projection = d3.geo.azimuthalEqualArea()
+	    .clipAngle(180)
+	    .scale((width) / 2 / Math.PI)
+	    .translate([width / 2, height / 2])
+	    .precision(.1);
+
+	var projection = d3.geo.albers()
+	    .rotate([96, 0])
+	    .center([-.6, 38.7])
+	    .parallels([29.5, 45.5])
+	    .scale((width) / 2 / Math.PI)
+	    .translate([width / 2, height / 2])
+	    .precision(.1);
+
+	var projection = d3.geo.albersUsa()
+	    .scale((width) / 2 / Math.PI)
+	    .translate([width / 2, height / 2]);
+
+	var projection = d3.geo.mercator()
+	    .center([0, 0])
+	    .scale((width) / 2 / Math.PI)
+	    .rotate([0,0])
+	    .translate([width / 2, height / 2]);
+
+	var projection = d3.geo.albers()
+	    .center([0, 55.4])
+	    .rotate([4.4, 0])
+	    .parallels([50, 60])
+	    .scale(6000)
+	    .translate([width / 2, height / 2]);
+
+
+
+Some basic configurations:
+
+.rotate([rotation])
+The rotation is in degrees with the default of [0,0,0] which represents [ longitude, latitude, roll ] in degrees, if there are only two values given for the projection the roll is 0 degrees.
+
+.center([location])
+the centre is given in degrees and is [0,0] by default. It sets the projections centre.
+
+.translate([point])
+sets the projection translation to an [ x, y ].  The default translation offset places [ 0 , 0 ] at the centre of a 960 x 500 area.
+
+.scale([scale])
+The default scale factor is 150.
+
+.clipAngle(angle)
+sets the projection’s clipping circle radius to the specified angle
+
+Some Projections
+
+Mercator projections
+
+Used by tiled mapping libraries such as Leaflet.  It does produce area distortion at the poles and so is not used for choropleth maps.
+
+azimuthal equal-area projection
+
+Maps from a Sphere to a disk and accurately represent the area in all regions of the sphere.  Works well with choropleth maps.
+
+Conic Equal Area projection
+
+This is an Albers projection.  The Albers projection is a conic  equal area projection. scale and shape are not preserved, distortion is minimal between the standard parallels and it shows areas accurately but distorts shapes.  It is a good projection for choropleth maps.  There are versions of the Albers projection in D3.js for specific areas such as albersUSA()
